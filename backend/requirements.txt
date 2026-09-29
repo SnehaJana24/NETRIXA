@@ -24,3 +24,4 @@ httpx==0.28.1
 
 # --- Phase 14: Security ---
 slowapi==0.1.9
+rasterio
