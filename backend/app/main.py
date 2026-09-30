@@ -43,6 +43,7 @@ app.add_middleware(
         "http://127.0.0.1:5173",
         "http://localhost:8443",
         "http://127.0.0.1:8443",
+        "https://netrixa-7ex8.onrender.com",
     ],
     allow_credentials=True,
     allow_methods=["*"],
