@@ -35,7 +35,7 @@ BASE_URL = "https://firms.modaps.eosdis.nasa.gov/api/area/csv"
 
 # Cache the India boundary so we do NOT query OSM every 10 minutes.
 BOUNDARY_FILE = (
-    Path(__file__).resolve().parents[3]
+    Path(__file__).resolve().parents[2]
     / "data"
     / "raw"
     / "boundaries"
