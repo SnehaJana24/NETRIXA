@@ -151,6 +151,15 @@ export default function Dashboard() {
 
   useEffect(() => {
     let active = true;
+    const lonSpan = mapBounds.maxLon - mapBounds.minLon;
+    const latSpan = mapBounds.maxLat - mapBounds.minLat;
+
+    if (lonSpan > 10 || latSpan > 10) {
+      setFacilities([]);
+      return () => {
+        active = false;
+      };
+    }
 
     const loadMapFacilities = async () => {
       try {
