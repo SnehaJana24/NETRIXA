@@ -9,7 +9,7 @@ from slowapi.util import get_remote_address
 
 from app.api import alerts, dashboard, events, facilities, health, map as map_api, priority, reports
 from app.core.config import get_settings
-from fastapi.middleware.cors import CORSMiddleware
+
 
 settings = get_settings()
 
@@ -36,6 +36,10 @@ app = FastAPI(
     version="0.1.0",
     lifespan=lifespan,
 )
+
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -45,16 +49,6 @@ app.add_middleware(
         "http://127.0.0.1:8443",
         "https://netrixa-7ex8.onrender.com",
     ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
